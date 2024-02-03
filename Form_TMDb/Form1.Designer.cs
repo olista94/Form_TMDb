@@ -36,6 +36,8 @@
             txtTituloPelicula = new TextBox();
             btnBuscar = new Button();
             listBoxSimilares = new ListBox();
+            pictureBox1 = new PictureBox();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // lblTitulo
@@ -117,11 +119,20 @@
             listBoxSimilares.Size = new Size(324, 109);
             listBoxSimilares.TabIndex = 7;
             // 
+            // pictureBox1
+            // 
+            pictureBox1.Location = new Point(254, 58);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(88, 84);
+            pictureBox1.TabIndex = 8;
+            pictureBox1.TabStop = false;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(356, 312);
+            Controls.Add(pictureBox1);
             Controls.Add(listBoxSimilares);
             Controls.Add(btnBuscar);
             Controls.Add(txtTituloPelicula);
@@ -133,6 +144,7 @@
             Margin = new Padding(4, 3, 4, 3);
             Name = "Form1";
             Text = "TMDb Form App";
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -147,5 +159,6 @@
         private System.Windows.Forms.TextBox txtTituloPelicula;
         private System.Windows.Forms.Button btnBuscar;
         private System.Windows.Forms.ListBox listBoxSimilares;
+        private PictureBox pictureBox1;
     }
 }

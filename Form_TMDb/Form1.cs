@@ -4,6 +4,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static Form_TMDb.Program;
 using RestSharp;
+using static System.Net.WebRequestMethods;
+using System.Net;
+using System.Drawing;
 
 namespace TMDbFormApp
 {
@@ -43,6 +46,8 @@ namespace TMDbFormApp
                 {
                     var primeraPelicula = resultado.Results[0];
 
+                    string urlImage = $"https://image.tmdb.org/t/p/original{primeraPelicula.poster_path}";
+
                     // Convertir la cadena a objeto DateTime en estilo estadounidense
                     // DateTime fechaEnFormatoUSAObj = 
 
@@ -55,6 +60,21 @@ namespace TMDbFormApp
                     lblPuntuacionMedia.Text = $"Puntuación Media: {primeraPelicula.vote_average}";
                     lblFechaEstreno.Text = $"Fecha de Estreno: {DateTime.ParseExact(primeraPelicula.release_date, "yyyy-MM-dd", null).ToString("dd/MM/yyyy")}";
                     lblSinopsis.Text = $"Sinopsis: {primeraPelicula.overview}";
+
+                    // Descargar la imagen desde la URL
+                    using (WebClient webClient = new WebClient())
+                    {
+                        byte[] data = webClient.DownloadData(urlImage);
+                        using (MemoryStream ms = new MemoryStream(data))
+                        {
+                            // Crear un objeto de imagen desde la secuencia de bytes descargada
+                            Image imagen = Image.FromStream(ms);
+
+                            // Asignar la imagen al PictureBox en el formulario
+                            pictureBox1.Image = imagen;
+                            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+                        }
+                    }
 
                     // Obtener y mostrar películas similares
                     var peliculasSimilares = await ObtenerPeliculasSimilares(primeraPelicula.Id);

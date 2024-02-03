@@ -25,26 +25,26 @@ namespace Form_TMDb
 
             Console.WriteLine("Bienvenido a la aplicación de búsqueda de películas en TMDb!");
 
-            while (true)
-            {
-                Console.Write("Escribe el nombre de la película (o escriba 'salir' para cerrar el programa): ");
-                string userInput = Console.ReadLine();
-
-                if (userInput.ToLower() == "salir")
-                {
-                    break;
-                }
-
-                if (string.IsNullOrWhiteSpace(userInput))
-                {
-                    Console.WriteLine("Por favor, ingrese un nombre de película válido.");
-                    continue;
-                }
-
-                await BuscarPelicula(userInput);
-            }
-
-            Console.WriteLine("Gracias por usar la aplicación");
+            // while (true)
+            // {
+            //     Console.Write("Escribe el nombre de la película (o escriba 'salir' para cerrar el programa): ");
+            //     string userInput = Console.ReadLine();
+            // 
+            //     if (userInput.ToLower() == "salir")
+            //     {
+            //         break;
+            //     }
+            // 
+            //     if (string.IsNullOrWhiteSpace(userInput))
+            //     {
+            //         Console.WriteLine("Por favor, ingrese un nombre de película válido.");
+            //         continue;
+            //     }
+            // 
+            //     await BuscarPelicula(userInput);
+            // }
+            // 
+            // Console.WriteLine("Gracias por usar la aplicación");
         }
 
         static async Task BuscarPelicula(string titulo)
@@ -63,6 +63,7 @@ namespace Form_TMDb
                 {
                     // Información detallada de la película
                     var detallesPelicula = resultado.Results[0];
+
                     Console.WriteLine("\nInformación de la película:");
                     Console.WriteLine($"Título: {detallesPelicula.title}");
                     Console.WriteLine($"Título original: {detallesPelicula.original_title}");
@@ -103,7 +104,7 @@ namespace Form_TMDb
             using var httpClient = new HttpClient();
             var url = $"https://api.themoviedb.org/3/movie/{peliculaId}/similar?api_key={TMDbApiKey}";
             var respuesta = await httpClient.GetStringAsync(url);
-
+        
             var resultado = JsonConvert.DeserializeObject<TMDbSearchResult<MovieDetails>>(respuesta);
             return resultado.Results;
         }
@@ -126,16 +127,18 @@ namespace Form_TMDb
         public class MovieDetails
         {
             public int Id { get; set; }
-
+        
             public string title { get; set; }
-
+        
             public string original_title { get; set; }
-
+        
             public double vote_average { get; set; }
-
+        
             public string release_date { get; set; }
-
+        
             public string overview { get; set; }
+
+            public string poster_path { get; set; }
         }
 
     }

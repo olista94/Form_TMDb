@@ -35,6 +35,7 @@
             lblSinopsis = new Label();
             txtTituloPelicula = new TextBox();
             btnBuscar = new Button();
+            lblSimilares = new Label();
             listBoxSimilares = new ListBox();
             pictureBox1 = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -58,7 +59,7 @@
             lblTituloOriginal.Name = "lblTituloOriginal";
             lblTituloOriginal.Size = new Size(88, 15);
             lblTituloOriginal.TabIndex = 1;
-            lblTituloOriginal.Text = "Título Original: ";
+            lblTituloOriginal.Text = "Título original: ";
             // 
             // lblPuntuacionMedia
             // 
@@ -68,7 +69,7 @@
             lblPuntuacionMedia.Name = "lblPuntuacionMedia";
             lblPuntuacionMedia.Size = new Size(110, 15);
             lblPuntuacionMedia.TabIndex = 2;
-            lblPuntuacionMedia.Text = "Puntuación Media: ";
+            lblPuntuacionMedia.Text = "Puntuación media: ";
             // 
             // lblFechaEstreno
             // 
@@ -78,7 +79,7 @@
             lblFechaEstreno.Name = "lblFechaEstreno";
             lblFechaEstreno.Size = new Size(86, 15);
             lblFechaEstreno.TabIndex = 3;
-            lblFechaEstreno.Text = "Fecha Estreno: ";
+            lblFechaEstreno.Text = "Fecha estreno: ";
             // 
             // lblSinopsis
             // 
@@ -109,21 +110,31 @@
             btnBuscar.UseVisualStyleBackColor = true;
             btnBuscar.Click += btnBuscar_Click;
             // 
+            // lblSimilares
+            // 
+            lblSimilares.AutoSize = true;
+            lblSimilares.Location = new Point(14, 172);
+            lblSimilares.Name = "lblSimilares";
+            lblSimilares.Size = new Size(108, 15);
+            lblSimilares.TabIndex = 9;
+            lblSimilares.Text = "Peliculas similares: ";
+            // 
             // listBoxSimilares
             // 
             listBoxSimilares.FormattingEnabled = true;
             listBoxSimilares.ItemHeight = 15;
-            listBoxSimilares.Location = new Point(18, 185);
+            listBoxSimilares.Location = new Point(14, 192);
             listBoxSimilares.Margin = new Padding(4, 3, 4, 3);
             listBoxSimilares.Name = "listBoxSimilares";
-            listBoxSimilares.Size = new Size(324, 109);
+            listBoxSimilares.Size = new Size(328, 109);
             listBoxSimilares.TabIndex = 7;
             // 
             // pictureBox1
             // 
             pictureBox1.Location = new Point(254, 58);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(88, 84);
+            pictureBox1.Size = new Size(88, 90);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.TabIndex = 8;
             pictureBox1.TabStop = false;
             // 
@@ -131,7 +142,9 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(356, 312);
+            BackColor = SystemColors.Control;
+            ClientSize = new Size(354, 311);
+            Controls.Add(lblSimilares);
             Controls.Add(pictureBox1);
             Controls.Add(listBoxSimilares);
             Controls.Add(btnBuscar);
@@ -141,9 +154,10 @@
             Controls.Add(lblPuntuacionMedia);
             Controls.Add(lblTituloOriginal);
             Controls.Add(lblTitulo);
+            Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             Margin = new Padding(4, 3, 4, 3);
             Name = "Form1";
-            Text = "TMDb Form App";
+            Text = "TMDb Form API";
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -160,5 +174,6 @@
         private System.Windows.Forms.Button btnBuscar;
         private System.Windows.Forms.ListBox listBoxSimilares;
         private PictureBox pictureBox1;
+        private Label lblSimilares;
     }
 }

@@ -7,13 +7,13 @@ using RestSharp;
 using static System.Net.WebRequestMethods;
 using System.Net;
 using System.Drawing;
+using Form_TMDb.Models;
 
 namespace TMDbFormApp
 {
     public partial class Form1 : Form
     {
-        private const string TMDbApiKey = "2485efbdb1367ebd2417ba38d297df22"; // Reemplaza 'tu_api_key' con la clave de tu cuenta en TMDb
-
+        private const string TMDbApiKey = "2485efbdb1367ebd2417ba38d297df22";
         public Form1()
         {
             InitializeComponent();
@@ -44,22 +44,16 @@ namespace TMDbFormApp
 
                 if (resultado.Results.Count > 0)
                 {
-                    var primeraPelicula = resultado.Results[0];
+                    var pelicula = resultado.Results[0];
 
-                    string urlImage = $"https://image.tmdb.org/t/p/original{primeraPelicula.poster_path}";
-
-                    // Convertir la cadena a objeto DateTime en estilo estadounidense
-                    // DateTime fechaEnFormatoUSAObj = 
-
-                    // Formatear el objeto DateTime en estilo español
-                    //string fechaEnFormatoEspanol = DateTime.ParseExact(primeraPelicula.release_date, "yyyy-MM-dd", null).ToString("dd/MM/yyyy");
+                    string urlImage = $"https://image.tmdb.org/t/p/original{pelicula.poster_path}";
 
                     // Mostrar información en los controles del formulario
-                    lblTitulo.Text = $"Título: {primeraPelicula.title}";
-                    lblTituloOriginal.Text = $"Título Original: {primeraPelicula.original_title}";
-                    lblPuntuacionMedia.Text = $"Puntuación Media: {primeraPelicula.vote_average}";
-                    lblFechaEstreno.Text = $"Fecha de Estreno: {DateTime.ParseExact(primeraPelicula.release_date, "yyyy-MM-dd", null).ToString("dd/MM/yyyy")}";
-                    lblSinopsis.Text = $"Sinopsis: {primeraPelicula.overview}";
+                    lblTitulo.Text = $"Título: {pelicula.title}";
+                    lblTituloOriginal.Text = $"Título Original: {pelicula.original_title}";
+                    lblPuntuacionMedia.Text = $"Puntuación Media: {pelicula.vote_average}";
+                    lblFechaEstreno.Text = $"Fecha de Estreno: {DateTime.ParseExact(pelicula.release_date, "yyyy-MM-dd", null).ToString("dd/MM/yyyy")}";
+                    lblSinopsis.Text = $"Sinopsis: {pelicula.overview}";
 
                     // Descargar la imagen desde la URL
                     using (WebClient webClient = new WebClient())
@@ -72,12 +66,11 @@ namespace TMDbFormApp
 
                             // Asignar la imagen al PictureBox en el formulario
                             pictureBox1.Image = imagen;
-                            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
                         }
                     }
 
                     // Obtener y mostrar películas similares
-                    var peliculasSimilares = await ObtenerPeliculasSimilares(primeraPelicula.Id);
+                    var peliculasSimilares = await ObtenerPeliculasSimilares(pelicula.Id);
                     MostrarPeliculasSimilares(peliculasSimilares);
                 }
                 else
